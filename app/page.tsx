@@ -548,7 +548,7 @@ export default function Home() {
       <footer className="py-12 border-t border-[var(--border-color)] section-bg-primary">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-[var(--text-tertiary)] text-center sm:text-left">&copy; 2025 강명우. All rights reserved.</p>
+            <p className="text-sm text-[var(--text-tertiary)] text-center sm:text-left">&copy; 2026 강명우. All rights reserved.</p>
             <p className="text-xs text-[var(--text-tertiary)] text-center sm:text-right">Built with Next.js & Tailwind CSS</p>
           </div>
         </div>
