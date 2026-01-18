@@ -6,11 +6,32 @@
 
 :root {
   --background: #08090a;
+  --background-secondary: #0a0b0d;
   --foreground: #e6e8eb;
   --text-secondary: #9ba1a8;
   --text-tertiary: #6c7278;
   --border-color: #1f2225;
   --card-bg: #0e0f11;
+  --card-hover: #121315;
+  --accent: #89EEFF;
+  --accent-hover: #5DD8F0;
+  --tag-bg: #1a1b1f;
+  --nav-bg: rgba(8, 9, 10, 0.8);
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --background-secondary: #f8f9fa;
+  --foreground: #1a1a1a;
+  --text-secondary: #4a5568;
+  --text-tertiary: #718096;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --card-hover: #f7fafc;
+  --accent: #0891b2;
+  --accent-hover: #0e7490;
+  --tag-bg: #f1f5f9;
+  --nav-bg: rgba(255, 255, 255, 0.8);
 }
 
 body {
@@ -20,6 +41,7 @@ body {
   font-feature-settings: 'cv11', 'ss01';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer utilities {
@@ -33,14 +55,14 @@ html {
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #e6e8eb, rgba(230, 232, 235, 0.3));
+  background: linear-gradient(to right, var(--foreground), var(--text-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-cyan {
-  background: linear-gradient(to right, #89EEFF, #5DD8F0);
+  background: linear-gradient(to right, var(--accent), var(--accent-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -48,6 +70,7 @@ html {
 
 .card-border {
   border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .section-padding {
@@ -71,9 +94,11 @@ html {
 
 /* Section backgrounds for visual separation */
 .section-bg-primary {
-  background-color: #08090a;
+  background-color: var(--background);
+  transition: background-color 0.3s ease;
 }
 
 .section-bg-secondary {
-  background-color: #0a0b0d;
+  background-color: var(--background-secondary);
+  transition: background-color 0.3s ease;
 }

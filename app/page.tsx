@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 // Animation variants
@@ -25,6 +25,30 @@ const staggerContainer = {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initialTheme = prefersDark ? "dark" : "light";
+      setTheme(initialTheme);
+      document.documentElement.setAttribute("data-theme", initialTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
+
   const projects = [
     {
       title: "비즈니스 매칭 플랫폼",
@@ -108,73 +132,111 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-[#08090a]/80 backdrop-blur-xl border-b border-[#1f2225]">
+      <nav className="fixed top-0 w-full z-50 bg-[var(--nav-bg)] backdrop-blur-xl border-b border-[var(--border-color)] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-lg font-semibold">강명우</h1>
+            <h1 className="text-lg font-semibold text-[var(--foreground)]">강명우</h1>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex gap-8 text-sm">
-              <a href="#about" className="text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors">About</a>
-              <a href="#experience" className="text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors">Experience</a>
-              <a href="#projects" className="text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors">Projects</a>
-              <a href="#skills" className="text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors">Skills</a>
-              <a href="#contact" className="text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors">Contact</a>
+            <div className="hidden md:flex items-center gap-8 text-sm">
+              <a href="#about" className="text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">About</a>
+              <a href="#experience" className="text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">Experience</a>
+              <a href="#projects" className="text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">Projects</a>
+              <a href="#skills" className="text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">Skills</a>
+              <a href="#contact" className="text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">Contact</a>
+
+              {/* Theme Toggle Button */}
+              {mounted && (
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-color)] hover:border-[var(--accent)] transition-all"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? (
+                    <svg className="w-5 h-5 text-[var(--foreground)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-[var(--foreground)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                  )}
+                </button>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-[#e6e8eb] p-2"
-              aria-label="Toggle menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              {mounted && (
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-color)] transition-all"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? (
+                    <svg className="w-5 h-5 text-[var(--foreground)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-[var(--foreground)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                  )}
+                </button>
+              )}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-[var(--foreground)] p-2"
+                aria-label="Toggle menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#0e0f11] border-t border-[#1f2225]">
+          <div className="md:hidden bg-[var(--card-bg)] border-t border-[var(--border-color)]">
             <div className="px-6 py-4 space-y-3">
               <a
                 href="#about"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors py-2"
+                className="block text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors py-2"
               >
                 About
               </a>
               <a
                 href="#experience"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors py-2"
+                className="block text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors py-2"
               >
                 Experience
               </a>
               <a
                 href="#projects"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors py-2"
+                className="block text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors py-2"
               >
                 Projects
               </a>
               <a
                 href="#skills"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors py-2"
+                className="block text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors py-2"
               >
                 Skills
               </a>
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-[#9ba1a8] hover:text-[#e6e8eb] transition-colors py-2"
+                className="block text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors py-2"
               >
                 Contact
               </a>
@@ -187,7 +249,7 @@ export default function Home() {
       <section id="hero" className="section-padding section-bg-primary min-h-screen flex flex-col justify-center items-center pt-32">
         <div className="text-center max-w-5xl mx-auto">
           <motion.div
-            className="mb-6 text-sm text-[#89EEFF] font-medium"
+            className="mb-6 text-sm text-[var(--accent)] font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
@@ -205,7 +267,7 @@ export default function Home() {
             <span className="gradient-text">with expertise</span>
           </motion.h1>
           <motion.p
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#9ba1a8] mb-12 max-w-2xl mx-auto px-4"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)] mb-12 max-w-2xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
@@ -222,13 +284,13 @@ export default function Home() {
           >
             <a
               href="#projects"
-              className="px-6 py-3 bg-[#89EEFF] text-[#08090a] rounded-lg hover:bg-[#5DD8F0] transition-all font-medium text-center"
+              className="px-6 py-3 bg-[var(--accent)] text-[var(--background)] rounded-lg hover:bg-[var(--accent-hover)] transition-all font-medium text-center"
             >
               프로젝트 보기
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 bg-[#0e0f11] border border-[#89EEFF]/30 text-[#e6e8eb] rounded-lg hover:bg-[#89EEFF]/10 hover:border-[#89EEFF] transition-all font-medium text-center"
+              className="px-6 py-3 bg-[var(--card-bg)] border border-[var(--accent)]/30 text-[var(--foreground)] rounded-lg hover:bg-[var(--accent)]/10 hover:border-[var(--accent)] transition-all font-medium text-center"
             >
               연락하기
             </a>
@@ -246,20 +308,20 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-sm text-[#9ba1a8] mb-4 uppercase tracking-wider"
+            className="text-sm text-[var(--text-secondary)] mb-4 uppercase tracking-wider"
             variants={fadeInUp}
           >
             About
           </motion.h2>
-          <div className="space-y-6 text-lg text-[#e6e8eb] leading-relaxed">
+          <div className="space-y-6 text-lg text-[var(--foreground)] leading-relaxed">
             <motion.p variants={fadeInUp}>
               스타트업 회사에서 Spring Framework를 사용한 Java 프로젝트를 GCP를 통해 웹 서비스를 한 경험이 있고,
               현재는 비즈니스 상담 플랫폼을 운영하여 B2B 서비스를 개발 및 관리하고 있습니다.
             </motion.p>
-            <motion.p className="text-[#9ba1a8]" variants={fadeInUp}>
+            <motion.p className="text-[var(--text-secondary)]" variants={fadeInUp}>
               정보처리기사 자격증을 보유하고 있으며, 목포대학교 멀티미디어공학과를 졸업했습니다.
             </motion.p>
-            <motion.p className="text-[#9ba1a8] border-l-2 border-[#89EEFF]/50 pl-4" variants={fadeInUp}>
+            <motion.p className="text-[var(--text-secondary)] border-l-2 border-[var(--accent)]/50 pl-4" variants={fadeInUp}>
               문서화와 커뮤니케이션을 중시하며, 팀과 함께 성장하는 개발을 지향합니다.
             </motion.p>
           </div>
@@ -276,7 +338,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            className="text-sm text-[var(--text-secondary)] mb-8 uppercase tracking-wider"
             variants={fadeInUp}
           >
             Experience
@@ -285,15 +347,15 @@ export default function Home() {
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all"
+                className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:bg-[var(--card-hover)] hover:border-[var(--accent)]/30 transition-all"
                 variants={fadeInUp}
               >
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-semibold text-[#e6e8eb]">{exp.company}</h3>
-                  <span className="text-sm text-[#6c7278]">{exp.duration}</span>
+                  <h3 className="text-xl font-semibold text-[var(--foreground)]">{exp.company}</h3>
+                  <span className="text-sm text-[var(--text-tertiary)]">{exp.duration}</span>
                 </div>
-                <p className="text-[#9ba1a8] mb-1">{exp.position}</p>
-                <p className="text-sm text-[#6c7278]">{exp.period}</p>
+                <p className="text-[var(--text-secondary)] mb-1">{exp.position}</p>
+                <p className="text-sm text-[var(--text-tertiary)]">{exp.period}</p>
               </motion.div>
             ))}
           </div>
@@ -310,7 +372,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            className="text-sm text-[var(--text-secondary)] mb-8 uppercase tracking-wider"
             variants={fadeInUp}
           >
             Projects
@@ -319,21 +381,21 @@ export default function Home() {
             {projects.map((project, index) => (
               <motion.div
                 key={index}
-                className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all group"
+                className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:bg-[var(--card-hover)] hover:border-[var(--accent)]/30 transition-all group"
                 variants={fadeInUp}
               >
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold text-[#e6e8eb] group-hover:text-[#89EEFF] transition-colors">
+                  <h3 className="text-xl font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
                     {project.title}
                   </h3>
-                  <span className="text-xs text-[#6c7278]">{project.period}</span>
+                  <span className="text-xs text-[var(--text-tertiary)]">{project.period}</span>
                 </div>
-                <p className="text-sm text-[#9ba1a8] mb-2">{project.company}</p>
-                <p className="text-[#9ba1a8] mb-4 text-sm leading-relaxed">{project.description}</p>
-                <p className="text-sm text-[#6c7278] mb-4">{project.role}</p>
+                <p className="text-sm text-[var(--text-secondary)] mb-2">{project.company}</p>
+                <p className="text-[var(--text-secondary)] mb-4 text-sm leading-relaxed">{project.description}</p>
+                <p className="text-sm text-[var(--text-tertiary)] mb-4">{project.role}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="px-2 py-1 bg-[#1a1b1f] card-border text-[#9ba1a8] rounded text-xs hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
+                    <span key={tagIndex} className="px-2 py-1 bg-[var(--tag-bg)] card-border text-[var(--text-secondary)] rounded text-xs hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-all cursor-default">
                       {tag}
                     </span>
                   ))}
@@ -354,59 +416,59 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            className="text-sm text-[var(--text-secondary)] mb-8 uppercase tracking-wider"
             variants={fadeInUp}
           >
             Skills
           </motion.h2>
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div
-              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:border-[var(--accent)]/30 transition-all"
               variants={fadeInUp}
             >
-              <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Frontend</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[var(--foreground)]">Frontend</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.frontend.map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
+                  <span key={index} className="px-3 py-1.5 bg-[var(--tag-bg)] card-border text-[var(--foreground)] rounded text-sm hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </motion.div>
             <motion.div
-              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:border-[var(--accent)]/30 transition-all"
               variants={fadeInUp}
             >
-              <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Backend</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[var(--foreground)]">Backend</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.backend.map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
+                  <span key={index} className="px-3 py-1.5 bg-[var(--tag-bg)] card-border text-[var(--foreground)] rounded text-sm hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </motion.div>
             <motion.div
-              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:border-[var(--accent)]/30 transition-all"
               variants={fadeInUp}
             >
-              <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Database</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[var(--foreground)]">Database</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.database.map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
+                  <span key={index} className="px-3 py-1.5 bg-[var(--tag-bg)] card-border text-[var(--foreground)] rounded text-sm hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </motion.div>
             <motion.div
-              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:border-[var(--accent)]/30 transition-all"
               variants={fadeInUp}
             >
-              <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Cloud & Tools</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[var(--foreground)]">Cloud & Tools</h3>
               <div className="flex flex-wrap gap-2">
                 {[...skills.cloud, ...skills.tools].map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
+                  <span key={index} className="px-3 py-1.5 bg-[var(--tag-bg)] card-border text-[var(--foreground)] rounded text-sm hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
@@ -426,7 +488,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            className="text-sm text-[var(--text-secondary)] mb-8 uppercase tracking-wider"
             variants={fadeInUp}
           >
             Contact
@@ -438,7 +500,7 @@ export default function Home() {
             프로젝트 협업하실래요?
           </motion.h3>
           <motion.p
-            className="text-lg text-[#9ba1a8] mb-12"
+            className="text-lg text-[var(--text-secondary)] mb-12"
             variants={fadeInUp}
           >
             새로운 프로젝트나 협업 기회에 대해 언제든지 연락주세요.
@@ -449,7 +511,7 @@ export default function Home() {
           >
             <a
               href="mailto:kmo1245@naver.com"
-              className="px-6 py-3 bg-[#89EEFF] text-[#08090a] rounded-lg hover:bg-[#5DD8F0] transition-all font-medium"
+              className="px-6 py-3 bg-[var(--accent)] text-[var(--background)] rounded-lg hover:bg-[var(--accent-hover)] transition-all font-medium"
             >
               이메일 보내기
             </a>
@@ -458,11 +520,11 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-[#1f2225] section-bg-primary">
+      <footer className="py-12 border-t border-[var(--border-color)] section-bg-primary">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-[#6c7278] text-center sm:text-left">&copy; 2024 강명우. All rights reserved.</p>
-            <p className="text-xs text-[#6c7278] text-center sm:text-right">Built with Next.js & Tailwind CSS</p>
+            <p className="text-sm text-[var(--text-tertiary)] text-center sm:text-left">&copy; 2024 강명우. All rights reserved.</p>
+            <p className="text-xs text-[var(--text-tertiary)] text-center sm:text-right">Built with Next.js & Tailwind CSS</p>
           </div>
         </div>
       </footer>
