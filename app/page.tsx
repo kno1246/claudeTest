@@ -78,7 +78,7 @@ export default function Home() {
       period: "2020.04 - 2021.02",
       company: "(주)도우테크",
       description: "다양한 오픈마켓의 API를 통한 자동 상품 등록 및 관리 시스템",
-      tags: ["Java", "Spring Boot", "MySQL", "GCP", "JSP"],
+      tags: ["Java", "MySQL", "GCP", "JSP"],
       role: "쿠팡, 롯데온, 위메프, 11번가 API 연동, 배송 정보 관리 시스템 개발"
     },
     {
@@ -122,7 +122,7 @@ export default function Home() {
 
   const skills = {
     frontend: ["JavaScript", "TypeScript", "React", "Next.js", "JSP"],
-    backend: ["Java", "Spring Framework", "Spring Boot", "Spring MVC", "Node.js"],
+    backend: ["Java", "Spring Framework", "Spring MVC", "Node.js"],
     database: ["MySQL", "PostgreSQL"],
     cloud: ["GCP", "AWS"],
     tools: ["Git", "Linux", "Ubuntu"]
@@ -269,7 +269,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
           >
-            5년 7개월 경력의 Full-Stack 개발자입니다.
+            5년 7개월 경력의 Frontend 개발자입니다.
             <br className="hidden sm:block" />
             <span className="sm:inline"> </span>B2B부터 B2C까지 폭넓은 서비스를 나은 방향으로 <br></br>발전시켜 드립니다.
           </motion.p>

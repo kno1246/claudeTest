@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "강명우 | Full-Stack Developer",
-  description: "5년 7개월 경력의 Full-Stack 개발자 강명우의 포트폴리오입니다. Java, JavaScript, TypeScript, React, Next.js 전문.",
-  keywords: ["강명우", "개발자", "Full-Stack", "Frontend", "Java", "JavaScript", "TypeScript", "React", "Next.js"],
+  title: "강명우 | Frontend Developer",
+  description: "5년 7개월 경력의 Frontend 개발자 강명우의 포트폴리오입니다.",
+  keywords: ["강명우", "개발자", "Frontend", "Java", "JavaScript", "TypeScript", "React", "Next.js"],
   authors: [{ name: "강명우" }],
   openGraph: {
-    title: "강명우 | Full-Stack Developer",
-    description: "5년 7개월 경력의 Full-Stack 개발자",
+    title: "강명우 | Frontend Developer",
+    description: "5년 7개월 경력의 Frontend 개발자",
     type: "website",
   },
 };
