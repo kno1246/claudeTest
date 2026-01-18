@@ -39,8 +39,8 @@ html {
   background-clip: text;
 }
 
-.gradient-text-purple {
-  background: linear-gradient(to right, #9b87f5, #7e69d6);
+.gradient-text-cyan {
+  background: linear-gradient(to right, #89EEFF, #5DD8F0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

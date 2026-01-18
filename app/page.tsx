@@ -181,13 +181,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in px-4" style={{ animationDelay: "0.3s" }}>
             <a
               href="#projects"
-              className="px-6 py-3 bg-[#e6e8eb] text-[#08090a] rounded-lg hover:bg-[#d1d4d8] transition-all font-medium text-center"
+              className="px-6 py-3 bg-[#89EEFF] text-[#08090a] rounded-lg hover:bg-[#5DD8F0] transition-all font-medium text-center"
             >
               프로젝트 보기
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 bg-[#0e0f11] card-border text-[#e6e8eb] rounded-lg hover:bg-[#1a1b1f] transition-all font-medium text-center"
+              className="px-6 py-3 bg-[#0e0f11] border border-[#89EEFF]/30 text-[#e6e8eb] rounded-lg hover:bg-[#89EEFF]/10 hover:border-[#89EEFF] transition-all font-medium text-center"
             >
               연락하기
             </a>
@@ -217,7 +217,7 @@ export default function Home() {
           <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Experience</h2>
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <div key={index} className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#12131 5] transition-all">
+              <div key={index} className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-semibold text-[#e6e8eb]">{exp.company}</h3>
                   <span className="text-sm text-[#6c7278]">{exp.duration}</span>
@@ -236,9 +236,9 @@ export default function Home() {
           <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Projects</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-              <div key={index} className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] transition-all group">
+              <div key={index} className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all group">
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold text-[#e6e8eb] group-hover:text-[#9b87f5] transition-colors">
+                  <h3 className="text-xl font-semibold text-[#e6e8eb] group-hover:text-[#89EEFF] transition-colors">
                     {project.title}
                   </h3>
                   <span className="text-xs text-[#6c7278]">{project.period}</span>
@@ -248,7 +248,7 @@ export default function Home() {
                 <p className="text-sm text-[#6c7278] mb-4">{project.role}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="px-2 py-1 bg-[#1a1b1f] card-border text-[#9ba1a8] rounded text-xs">
+                    <span key={tagIndex} className="px-2 py-1 bg-[#1a1b1f] card-border text-[#9ba1a8] rounded text-xs hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
                       {tag}
                     </span>
                   ))}
@@ -264,41 +264,41 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Skills</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11]">
+            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Frontend</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.frontend.map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm">
+                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11]">
+            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Backend</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.backend.map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm">
+                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11]">
+            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Database</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.database.map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm">
+                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11]">
+            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Cloud & Tools</h3>
               <div className="flex flex-wrap gap-2">
                 {[...skills.cloud, ...skills.tools].map((skill, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm">
+                  <span key={index} className="px-3 py-1.5 bg-[#1a1b1f] card-border text-[#e6e8eb] rounded text-sm hover:bg-[#89EEFF]/10 hover:text-[#89EEFF] transition-all cursor-default">
                     {skill}
                   </span>
                 ))}
@@ -312,14 +312,14 @@ export default function Home() {
       <section id="contact" className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Contact</h2>
-          <h3 className="text-4xl font-bold mb-6 gradient-text-purple">프로젝트 협업하실래요?</h3>
+          <h3 className="text-4xl font-bold mb-6 gradient-text-cyan">프로젝트 협업하실래요?</h3>
           <p className="text-lg text-[#9ba1a8] mb-12">
             새로운 프로젝트나 협업 기회에 대해 언제든지 연락주세요.
           </p>
           <div className="flex justify-center gap-4">
             <a
               href="mailto:kmo1245@naver.com"
-              className="px-6 py-3 card-border bg-[#0e0f11] text-[#e6e8eb] rounded-lg hover:bg-[#1a1b1f] transition-all font-medium"
+              className="px-6 py-3 bg-[#89EEFF] text-[#08090a] rounded-lg hover:bg-[#5DD8F0] transition-all font-medium"
             >
               이메일 보내기
             </a>
