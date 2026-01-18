@@ -35,10 +35,9 @@ export default function Home() {
       setTheme(savedTheme);
       document.documentElement.setAttribute("data-theme", savedTheme);
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initialTheme = prefersDark ? "dark" : "light";
-      setTheme(initialTheme);
-      document.documentElement.setAttribute("data-theme", initialTheme);
+      // 기본값: 다크모드
+      setTheme("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
     }
   }, []);
 
