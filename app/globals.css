@@ -68,3 +68,12 @@ html {
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
 }
+
+/* Section backgrounds for visual separation */
+.section-bg-primary {
+  background-color: #08090a;
+}
+
+.section-bg-secondary {
+  background-color: #0a0b0d;
+}

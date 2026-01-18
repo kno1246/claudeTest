@@ -1,6 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -163,22 +184,42 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="section-padding min-h-screen flex flex-col justify-center items-center pt-32">
+      <section id="hero" className="section-padding section-bg-primary min-h-screen flex flex-col justify-center items-center pt-32">
         <div className="text-center max-w-5xl mx-auto">
-          <div className="mb-6 text-sm text-[#9ba1a8] animate-fade-in">
-            Full-Stack Developer
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-balance animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <motion.div
+            className="mb-6 text-sm text-[#89EEFF] font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            비즈니스 문제를 코드로 해결하는 개발자
+          </motion.div>
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-balance"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+          >
             <span className="gradient-text">Build your product</span>
             <br />
             <span className="gradient-text">with expertise</span>
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#9ba1a8] mb-12 max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: "0.2s" }}>
+          </motion.h1>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#9ba1a8] mb-12 max-w-2xl mx-auto px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+          >
             Java와 JavaScript를 다루는 5년 7개월 경력의 개발자입니다.
             <br className="hidden sm:block" />
             <span className="sm:inline"> </span>B2B 플랫폼부터 오픈마켓 자동화까지 다양한 프로젝트를 경험했습니다.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in px-4" style={{ animationDelay: "0.3s" }}>
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}
+          >
             <a
               href="#projects"
               className="px-6 py-3 bg-[#89EEFF] text-[#08090a] rounded-lg hover:bg-[#5DD8F0] transition-all font-medium text-center"
@@ -191,52 +232,96 @@ export default function Home() {
             >
               연락하기
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-sm text-[#9ba1a8] mb-4 uppercase tracking-wider">About</h2>
+      <section id="about" className="section-padding section-bg-secondary">
+        <motion.div
+          className="max-w-4xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-sm text-[#9ba1a8] mb-4 uppercase tracking-wider"
+            variants={fadeInUp}
+          >
+            About
+          </motion.h2>
           <div className="space-y-6 text-lg text-[#e6e8eb] leading-relaxed">
-            <p>
+            <motion.p variants={fadeInUp}>
               스타트업 회사에서 Spring Framework를 사용한 Java 프로젝트를 GCP를 통해 웹 서비스를 한 경험이 있고,
               현재는 비즈니스 상담 플랫폼을 운영하여 B2B 서비스를 개발 및 관리하고 있습니다.
-            </p>
-            <p className="text-[#9ba1a8]">
+            </motion.p>
+            <motion.p className="text-[#9ba1a8]" variants={fadeInUp}>
               정보처리기사 자격증을 보유하고 있으며, 목포대학교 멀티미디어공학과를 졸업했습니다.
-            </p>
+            </motion.p>
+            <motion.p className="text-[#9ba1a8] border-l-2 border-[#89EEFF]/50 pl-4" variants={fadeInUp}>
+              문서화와 커뮤니케이션을 중시하며, 팀과 함께 성장하는 개발을 지향합니다.
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Experience</h2>
+      <section id="experience" className="section-padding section-bg-primary">
+        <motion.div
+          className="max-w-4xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            variants={fadeInUp}
+          >
+            Experience
+          </motion.h2>
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <div key={index} className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all">
+              <motion.div
+                key={index}
+                className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all"
+                variants={fadeInUp}
+              >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-semibold text-[#e6e8eb]">{exp.company}</h3>
                   <span className="text-sm text-[#6c7278]">{exp.duration}</span>
                 </div>
                 <p className="text-[#9ba1a8] mb-1">{exp.position}</p>
                 <p className="text-sm text-[#6c7278]">{exp.period}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="section-padding">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Projects</h2>
+      <section id="projects" className="section-padding section-bg-secondary">
+        <motion.div
+          className="max-w-6xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            variants={fadeInUp}
+          >
+            Projects
+          </motion.h2>
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-              <div key={index} className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all group">
+              <motion.div
+                key={index}
+                className="card-border rounded-lg p-6 bg-[#0e0f11] hover:bg-[#121315] hover:border-[#89EEFF]/30 transition-all group"
+                variants={fadeInUp}
+              >
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-semibold text-[#e6e8eb] group-hover:text-[#89EEFF] transition-colors">
                     {project.title}
@@ -253,18 +338,32 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Skills</h2>
+      <section id="skills" className="section-padding section-bg-primary">
+        <motion.div
+          className="max-w-4xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            variants={fadeInUp}
+          >
+            Skills
+          </motion.h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
+            <motion.div
+              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              variants={fadeInUp}
+            >
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Frontend</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.frontend.map((skill, index) => (
@@ -273,8 +372,11 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </div>
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
+            </motion.div>
+            <motion.div
+              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              variants={fadeInUp}
+            >
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Backend</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.backend.map((skill, index) => (
@@ -283,8 +385,11 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </div>
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
+            </motion.div>
+            <motion.div
+              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              variants={fadeInUp}
+            >
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Database</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.database.map((skill, index) => (
@@ -293,8 +398,11 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </div>
-            <div className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all">
+            </motion.div>
+            <motion.div
+              className="card-border rounded-lg p-6 bg-[#0e0f11] hover:border-[#89EEFF]/30 transition-all"
+              variants={fadeInUp}
+            >
               <h3 className="text-lg font-semibold mb-4 text-[#e6e8eb]">Cloud & Tools</h3>
               <div className="flex flex-wrap gap-2">
                 {[...skills.cloud, ...skills.tools].map((skill, index) => (
@@ -303,32 +411,54 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="section-padding">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider">Contact</h2>
-          <h3 className="text-4xl font-bold mb-6 gradient-text-cyan">프로젝트 협업하실래요?</h3>
-          <p className="text-lg text-[#9ba1a8] mb-12">
+      <section id="contact" className="section-padding section-bg-secondary">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-sm text-[#9ba1a8] mb-8 uppercase tracking-wider"
+            variants={fadeInUp}
+          >
+            Contact
+          </motion.h2>
+          <motion.h3
+            className="text-4xl font-bold mb-6 gradient-text-cyan"
+            variants={fadeInUp}
+          >
+            프로젝트 협업하실래요?
+          </motion.h3>
+          <motion.p
+            className="text-lg text-[#9ba1a8] mb-12"
+            variants={fadeInUp}
+          >
             새로운 프로젝트나 협업 기회에 대해 언제든지 연락주세요.
-          </p>
-          <div className="flex justify-center gap-4">
+          </motion.p>
+          <motion.div
+            className="flex justify-center gap-4"
+            variants={fadeInUp}
+          >
             <a
               href="mailto:kmo1245@naver.com"
               className="px-6 py-3 bg-[#89EEFF] text-[#08090a] rounded-lg hover:bg-[#5DD8F0] transition-all font-medium"
             >
               이메일 보내기
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-[#1f2225]">
+      <footer className="py-12 border-t border-[#1f2225] section-bg-primary">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-[#6c7278] text-center sm:text-left">&copy; 2024 강명우. All rights reserved.</p>
