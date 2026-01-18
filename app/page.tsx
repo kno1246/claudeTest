@@ -253,7 +253,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            비즈니스 문제를 코드로 해결하는 개발자
+            더 나은 서비스를 위하여 끊임없이 고민하는 개발자
           </motion.div>
           <motion.h1
             className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-balance"
@@ -261,9 +261,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
           >
-            <span className="gradient-text">Build your product</span>
-            <br />
-            <span className="gradient-text">with expertise</span>
+            <span className="gradient-text">Welcome my portfolio</span>
           </motion.h1>
           <motion.p
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)] mb-12 max-w-2xl mx-auto px-4"
@@ -271,9 +269,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
           >
-            Java와 JavaScript를 다루는 5년 7개월 경력의 개발자입니다.
+            5년 7개월 경력의 Full-Stack 개발자입니다.
             <br className="hidden sm:block" />
-            <span className="sm:inline"> </span>B2B 플랫폼부터 오픈마켓 자동화까지 다양한 프로젝트를 경험했습니다.
+            <span className="sm:inline"> </span>B2B부터 B2C까지 폭넓은 서비스를 나은 방향으로 <br></br>발전시켜 드립니다.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center px-4"
@@ -314,16 +312,44 @@ export default function Home() {
           </motion.h2>
           <div className="space-y-6 text-lg text-[var(--foreground)] leading-relaxed">
             <motion.p variants={fadeInUp}>
-              스타트업 회사에서 Spring Framework를 사용한 Java 프로젝트를 GCP를 통해 웹 서비스를 한 경험이 있고,
-              현재는 비즈니스 상담 플랫폼을 운영하여 B2B 서비스를 개발 및 관리하고 있습니다.
+              Spring Framework, React, Next.js 등 다양한 웹개발 스킬을 기반으로
+              <span className="text-[var(--accent)] font-medium"> B2B부터 B2C까지 폭넓은 비즈니스 문제를 해결</span>하는 것이 저의 특기입니다.
             </motion.p>
             <motion.p className="text-[var(--text-secondary)]" variants={fadeInUp}>
-              정보처리기사 자격증을 보유하고 있으며, 목포대학교 멀티미디어공학과를 졸업했습니다.
+              기업용 플랫폼부터 소비자 대상 서비스까지, 다양한 프로젝트 경험을 통해
+              비즈니스의 본질을 이해하고 최적의 기술 솔루션을 제안합니다.
+              뛰어난 문제 해결 능력과 협업 능력으로 팀에 기여할 수 있습니다.
             </motion.p>
             <motion.p className="text-[var(--text-secondary)] border-l-2 border-[var(--accent)]/50 pl-4" variants={fadeInUp}>
               문서화와 커뮤니케이션을 중시하며, 팀과 함께 성장하는 개발을 지향합니다.
             </motion.p>
           </div>
+
+          {/* Education & Certification */}
+          <motion.div
+            className="grid sm:grid-cols-2 gap-4 mt-10"
+            variants={fadeInUp}
+          >
+            {/* Education Card */}
+            <div className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:bg-[var(--card-hover)] hover:border-[var(--accent)]/30 transition-all">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-semibold text-[var(--foreground)]">목포대학교</h3>
+                <span className="text-xs text-[var(--text-tertiary)]">Education</span>
+              </div>
+              <p className="text-[var(--text-secondary)] mb-1">멀티미디어 공학과</p>
+              <p className="text-sm text-[var(--text-tertiary)]">학사</p>
+            </div>
+
+            {/* Certification Card */}
+            <div className="card-border rounded-lg p-6 bg-[var(--card-bg)] hover:bg-[var(--card-hover)] hover:border-[var(--accent)]/30 transition-all">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-semibold text-[var(--foreground)]">정보처리기사</h3>
+                <span className="text-xs text-[var(--text-tertiary)]">Certification</span>
+              </div>
+              <p className="text-[var(--text-secondary)] mb-1">한국산업인력공단</p>
+              <p className="text-sm text-[var(--text-tertiary)]">국가기술자격</p>
+            </div>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -496,7 +522,7 @@ export default function Home() {
             className="text-4xl font-bold mb-6 gradient-text-cyan"
             variants={fadeInUp}
           >
-            프로젝트 협업하실래요?
+            저와 함께 하시겠습니까?
           </motion.h3>
           <motion.p
             className="text-lg text-[var(--text-secondary)] mb-12"
@@ -522,7 +548,7 @@ export default function Home() {
       <footer className="py-12 border-t border-[var(--border-color)] section-bg-primary">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-[var(--text-tertiary)] text-center sm:text-left">&copy; 2024 강명우. All rights reserved.</p>
+            <p className="text-sm text-[var(--text-tertiary)] text-center sm:text-left">&copy; 2025 강명우. All rights reserved.</p>
             <p className="text-xs text-[var(--text-tertiary)] text-center sm:text-right">Built with Next.js & Tailwind CSS</p>
           </div>
         </div>
