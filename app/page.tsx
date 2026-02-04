@@ -87,7 +87,7 @@ export default function Home() {
       company: "(주)이즈피엠피",
       description: "어린이 놀이터 사업장을 위한 키오스크 프로그램",
       tags: ["Java", "JavaScript", "Spring MVC"],
-      role: "키오스크 Front-end 개발, 다국어화 및 결제 시스템 구현"
+      role: "키오스크 Frontend 개발, 다국어화 및 결제 시스템 구현"
     },
     {
       title: "인제 스마트관광 서비스",
@@ -269,7 +269,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
           >
-            5년 7개월 경력의 Frontend 개발자입니다.
+            5년 7개월 경력의 Web 개발자입니다.
             <br className="hidden sm:block" />
             <span className="sm:inline"> </span>B2B부터 B2C까지 폭넓은 서비스를 나은 방향으로 <br></br>발전시켜 드립니다.
           </motion.p>
